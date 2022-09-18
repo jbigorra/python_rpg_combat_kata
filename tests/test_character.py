@@ -1,6 +1,33 @@
 import pytest
 
-from src.character import Character, CharacterType
+from src.character import Character, CharacterType, DefaultCharacterAttributes
+
+
+class CharacterFactory:
+    level: int = DefaultCharacterAttributes.LEVEL
+    health: int = DefaultCharacterAttributes.MAXIMUM_HEALTH
+    type: CharacterType = DefaultCharacterAttributes.TYPE
+
+    def with_level(self, level: int) -> "CharacterFactory":
+        self.level = level
+        return self
+
+    def with_health(self, health: int) -> "CharacterFactory":
+        self.health = health
+        return self
+
+    def with_type(self, type: CharacterType) -> "CharacterFactory":
+        self.type = type
+        return self
+
+    def build(self) -> "Character":
+        return Character(level=self.level, health=self.health, type=self.type)
+
+    def setup_base_ranged_character(self) -> "CharacterFactory":
+        self.level = DefaultCharacterAttributes.LEVEL
+        self.health = DefaultCharacterAttributes.MAXIMUM_HEALTH
+        self.type = CharacterType.RANGED
+        return self
 
 
 class TestCharacter:

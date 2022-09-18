@@ -6,6 +6,12 @@ class CharacterType(Enum):
     MELEE = "MELEE"
 
 
+class DefaultCharacterAttributes:
+    LEVEL = 1
+    MAXIMUM_HEALTH = 1000
+    TYPE = CharacterType.MELEE
+
+
 class Character:
     max_attack_ranged: float
 
