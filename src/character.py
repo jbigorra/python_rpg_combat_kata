@@ -6,17 +6,23 @@ class CharacterType(Enum):
     MELEE = "MELEE"
 
 
-class DefaultCharacterAttributes:
+class CharacterConfig:
     LEVEL = 1
     MAXIMUM_HEALTH = 1000
     TYPE = CharacterType.MELEE
+    RANGED_MAX_ATTACK_RANGE = 20
+    MELEE_MAX_ATTACK_RANGE = 2
 
 
 class Character:
     max_attack_ranged: float
 
     def __init__(self, level: int, health: int, type: "CharacterType" = CharacterType.MELEE):
-        self.max_attack_ranged = 2 if type == CharacterType.MELEE else 20
+        self.max_attack_ranged = (
+            CharacterConfig.MELEE_MAX_ATTACK_RANGE
+            if type == CharacterType.MELEE
+            else CharacterConfig.RANGED_MAX_ATTACK_RANGE
+        )
         self.type = type
         self.level = level
         self.health = health
@@ -24,9 +30,9 @@ class Character:
     def is_alive(self):
         return self.health > 0
 
-    def damage(self, target: "Character", amount: int, targetDistance: float):
+    def damage(self, target: "Character", amount: int, target_distance: float):
         damage = amount
-        if self is target or targetDistance > self.max_attack_ranged:
+        if self is target or target_distance > self.max_attack_ranged:
             return
 
         if (target.level - self.level) >= 5:
@@ -42,5 +48,5 @@ class Character:
 
         character.health += amount
 
-        if character.health > 1000:
-            character.health = 1000
+        if character.health > CharacterConfig.MAXIMUM_HEALTH:
+            character.health = CharacterConfig.MAXIMUM_HEALTH

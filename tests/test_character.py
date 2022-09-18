@@ -1,12 +1,17 @@
 import pytest
 
-from src.character import Character, CharacterType, DefaultCharacterAttributes
+from src.character import Character, CharacterType, CharacterConfig
 
 
 class CharacterFactory:
-    level: int = DefaultCharacterAttributes.LEVEL
-    health: int = DefaultCharacterAttributes.MAXIMUM_HEALTH
-    type: CharacterType = DefaultCharacterAttributes.TYPE
+    level: int = CharacterConfig.LEVEL
+    health: int = CharacterConfig.MAXIMUM_HEALTH
+    type: CharacterType = CharacterConfig.TYPE
+
+    def _reset_state(self):
+        self.level = CharacterConfig.LEVEL
+        self.health = CharacterConfig.MAXIMUM_HEALTH
+        self.type = CharacterConfig.TYPE
 
     def with_level(self, level: int) -> "CharacterFactory":
         self.level = level
@@ -21,11 +26,13 @@ class CharacterFactory:
         return self
 
     def build(self) -> "Character":
-        return Character(level=self.level, health=self.health, type=self.type)
+        character = Character(level=self.level, health=self.health, type=self.type)
+        self._reset_state()
+        return character
 
     def setup_base_ranged_character(self) -> "CharacterFactory":
-        self.level = DefaultCharacterAttributes.LEVEL
-        self.health = DefaultCharacterAttributes.MAXIMUM_HEALTH
+        self.level = CharacterConfig.LEVEL
+        self.health = CharacterConfig.MAXIMUM_HEALTH
         self.type = CharacterType.RANGED
         return self
 
@@ -34,26 +41,26 @@ class TestCharacter:
     def test_character_initial_state(self):
         character = Character(level=1, health=1000)
 
-        assert character.level == 1
-        assert character.health == 1000
+        assert character.level == CharacterConfig.LEVEL
+        assert character.health == CharacterConfig.MAXIMUM_HEALTH
         assert character.is_alive() is True
 
     def test_melee_character_initial_state(self):
         character = Character(level=1, health=1000)
 
-        assert character.level == 1
-        assert character.health == 1000
+        assert character.level == CharacterConfig.LEVEL
+        assert character.health == CharacterConfig.MAXIMUM_HEALTH
         assert character.is_alive() is True
-        assert character.max_attack_ranged == 2
+        assert character.max_attack_ranged == CharacterConfig.MELEE_MAX_ATTACK_RANGE
         assert character.type == CharacterType.MELEE
 
     def test_ranged_character_initial_state(self):
         character = Character(level=1, health=1000, type=CharacterType.RANGED)
 
-        assert character.level == 1
-        assert character.health == 1000
+        assert character.level == CharacterConfig.LEVEL
+        assert character.health == CharacterConfig.MAXIMUM_HEALTH
         assert character.is_alive() is True
-        assert character.max_attack_ranged == 20
+        assert character.max_attack_ranged == CharacterConfig.RANGED_MAX_ATTACK_RANGE
         assert character.type == CharacterType.RANGED
 
     def test_character_damages_another_character(self):
