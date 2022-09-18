@@ -1,5 +1,9 @@
+
+
 class Character:
-    def __init__(self, level: int, health: int):
+    def __init__(self, level: int, health: int, type: str = "melee"):
+        self.max_attack_ranged = 2 if type == "melee" else 20
+        self.type = type
         self.level = level
         self.health = health
 

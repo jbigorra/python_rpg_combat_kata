@@ -11,6 +11,24 @@ class TestCharacter:
         assert character.health == 1000
         assert character.is_alive() is True
 
+    def test_melee_character_initial_state(self):
+        character = Character(level=1, health=1000)
+
+        assert character.level == 1
+        assert character.health == 1000
+        assert character.is_alive() is True
+        assert character.max_attack_ranged == 2
+        assert character.type == "melee"
+
+    def test_ranged_character_initial_state(self):
+        character = Character(level=1, health=1000, type="ranged")
+
+        assert character.level == 1
+        assert character.health == 1000
+        assert character.is_alive() is True
+        assert character.max_attack_ranged == 20
+        assert character.type == "ranged"
+
     def test_character_damages_another_character(self):
         character1 = Character(level=1, health=1000)
         character2 = Character(level=1, health=1000)
@@ -87,15 +105,7 @@ class TestCharacter:
 
         assert character2.health == 850
 
-    # # --- Iteration 3
-    # @pytest.mark.parametrize("type", [CharacterType.MELEE, CharacterType.RANGED])
-    # def test_character_initial_state(self, type: CharacterType):
-    #     character = Character(level=1, health=1000, type=type)
-    #
-    #     assert character.level == 1
-    #     assert character.health == 1000
-    #     assert character.is_alive() is True
-    #     assert character.type == type
+    # --- Iteration 3
 
 
 
