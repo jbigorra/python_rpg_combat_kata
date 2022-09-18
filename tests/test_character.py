@@ -78,15 +78,15 @@ class TestCharacter:
 
         assert character2.health == 950
 
-    # @pytest.mark.parametrize("level", [6, 7])
-    # def test_damage_is_increased_by_50_percent_when_target_is_5_levels_below(self, level):
-    #     character1 = Character(level=level, health=1000)
-    #     character2 = Character(level=1, health=1000)
-    #
-    #     character1.deal(character2, 100)
-    #
-    #     assert character1.health == 850
-    #
+    @pytest.mark.parametrize("level", [6, 7])
+    def test_damage_is_increased_by_50_percent_when_target_is_5_levels_below(self, level):
+        character1 = Character(level=level, health=1000)
+        character2 = Character(level=1, health=1000)
+
+        character1.damage(character2, 100)
+
+        assert character2.health == 850
+
     # # --- Iteration 3
     # @pytest.mark.parametrize("type", [CharacterType.MELEE, CharacterType.RANGED])
     # def test_character_initial_state(self, type: CharacterType):

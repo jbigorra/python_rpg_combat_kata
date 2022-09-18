@@ -13,6 +13,8 @@ class Character:
 
         if (target.level - self.level) >= 5:
             damage = amount * 0.5
+        elif (target.level - self.level) <= -5:
+            damage = amount * 1.5
 
         target.health -= damage
 
