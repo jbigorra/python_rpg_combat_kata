@@ -7,6 +7,9 @@ class Character:
         return self.health > 0
 
     def damage(self, character: "Character", amount: int):
+        if self is character:
+            return
+
         character.health -= amount
 
     def heal(self, character: "Character", amount: int):

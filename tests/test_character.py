@@ -52,22 +52,22 @@ class TestCharacter:
         assert character2.health == 0
         assert character2.is_alive() is False
 
-    # # --- Iteration 2
-    #
-    # def test_a_character_cannot_damage_itself(self):
-    #     character1 = Character(level=1, health=1000)
-    #
-    #     character1.damage(character1, 100)
-    #
-    #     assert character1.health == 1000
-    #
-    # def test_a_character_can_heal_itself(self):
-    #     character1 = Character(level=1, health=900)
-    #
-    #     character1.heal(character1, 100)
-    #
-    #     assert character1.health == 1000
-    #
+    # --- Iteration 2
+
+    def test_a_character_cannot_damage_itself(self):
+        character1 = Character(level=1, health=1000)
+
+        character1.damage(character1, 100)
+
+        assert character1.health == 1000
+
+    def test_a_character_can_heal_itself(self):
+        character1 = Character(level=1, health=900)
+
+        character1.heal(character1, 100)
+
+        assert character1.health == 1000
+
     # def test_a_character_can_only_heal_itself(self):
     #     character1 = Character(level=1, health=1000)
     #     character2 = Character(level=1, health=900)
