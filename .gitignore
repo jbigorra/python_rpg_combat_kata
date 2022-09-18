@@ -1,3 +1,7 @@
 /.idea/
 /.vscode/
 .ds_store
+
+# Python
+
+**/__pycache__/**/*
