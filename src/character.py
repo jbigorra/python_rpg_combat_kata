@@ -1,4 +1,8 @@
 
 class Character:
-    def __init__(self):
-        pass
+    def __init__(self, level: int, health: int):
+        self.level = level
+        self.health = health
+
+    def is_alive(self):
+        return self.health > 0
