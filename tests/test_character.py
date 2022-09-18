@@ -105,7 +105,22 @@ class TestCharacter:
 
         assert character2.health == 850
 
-    # --- Iteration 3
+    # Iteration 3
 
+    def test_melee_character_cannot_damage_another_character_out_of_range(self):
+        character1 = Character(level=1, health=1000)
+        character2 = Character(level=1, health=1000)
+
+        character1.damage(character2, 100, 3)
+
+        assert character2.health == 1000
+
+    def test_ranged_character_cannot_damage_another_character_out_of_range(self):
+        character1 = Character(level=1, health=1000, type="RANGED")
+        character2 = Character(level=1, health=1000, type="MELEE")
+
+        character1.damage(character2, 100, 21)
+
+        assert character2.health == 1000
 
 

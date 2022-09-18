@@ -1,6 +1,8 @@
 
 
 class Character:
+    max_attack_ranged: float
+
     def __init__(self, level: int, health: int, type: str = "melee"):
         self.max_attack_ranged = 2 if type == "melee" else 20
         self.type = type
@@ -10,9 +12,9 @@ class Character:
     def is_alive(self):
         return self.health > 0
 
-    def damage(self, target: "Character", amount: int):
+    def damage(self, target: "Character", amount: int, targetDistance: float):
         damage = amount
-        if self is target:
+        if self is target or targetDistance > self.max_attack_ranged:
             return
 
         if (target.level - self.level) >= 5:
