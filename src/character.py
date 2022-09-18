@@ -6,11 +6,15 @@ class Character:
     def is_alive(self):
         return self.health > 0
 
-    def damage(self, character: "Character", amount: int):
-        if self is character:
+    def damage(self, target: "Character", amount: int):
+        damage = amount
+        if self is target:
             return
 
-        character.health -= amount
+        if (target.level - self.level) >= 5:
+            damage = amount * 0.5
+
+        target.health -= damage
 
     def heal(self, character: "Character", amount: int):
         if not character.is_alive() or character is not self:
