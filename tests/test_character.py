@@ -27,21 +27,12 @@ class TestCharacter:
         assert character2.health == 0
         assert character2.is_alive() is False
 
-    def test_character_heals_another_character(self):
-        character1 = Character(level=1, health=1000)
-        character2 = Character(level=1, health=800)
-
-        character1.heal(character2, 100)
-
-        assert character2.health == 900
-
     def test_character_cannot_be_healed_above_maximum_health(self):
-        character1 = Character(level=1, health=1000)
-        character2 = Character(level=1, health=950)
+        character = Character(level=1, health=950)
 
-        character1.heal(character2, 100)
+        character.heal(character, 100)
 
-        assert character2.health == 1000
+        assert character.health == 1000
 
     def test_a_dead_character_cannot_be_healed(self):
         character1 = Character(level=1, health=1000)
@@ -68,14 +59,14 @@ class TestCharacter:
 
         assert character1.health == 1000
 
-    # def test_a_character_can_only_heal_itself(self):
-    #     character1 = Character(level=1, health=1000)
-    #     character2 = Character(level=1, health=900)
-    #
-    #     character1.heal(character2, 100)
-    #
-    #     assert character1.health == 900
-    #
+    def test_a_character_can_only_heal_itself(self):
+        character1 = Character(level=1, health=1000)
+        character2 = Character(level=1, health=900)
+
+        character1.heal(character2, 100)
+
+        assert character2.health == 900
+
     # @pytest.mark.parametrize("level", [6, 7])
     # def test_damage_is_reduced_by_50_percent_when_target_is_5_levels_above(self, level):
     #     character1 = Character(level=1, health=1000)

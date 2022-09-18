@@ -13,7 +13,7 @@ class Character:
         character.health -= amount
 
     def heal(self, character: "Character", amount: int):
-        if not character.is_alive():
+        if not character.is_alive() or character is not self:
             return
 
         character.health += amount
