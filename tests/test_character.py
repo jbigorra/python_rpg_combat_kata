@@ -33,7 +33,7 @@ class TestCharacter:
         character1 = Character(level=1, health=1000)
         character2 = Character(level=1, health=1000)
 
-        character1.damage(character2, 100)
+        character1.damage(character2, 100, 1)
 
         assert character1.health == 1000
         assert character2.health == 900
@@ -42,7 +42,7 @@ class TestCharacter:
         character1 = Character(level=1, health=1000)
         character2 = Character(level=1, health=100)
 
-        character1.damage(character2, 100)
+        character1.damage(character2, 100, 1)
 
         assert character2.health == 0
         assert character2.is_alive() is False
@@ -68,7 +68,7 @@ class TestCharacter:
     def test_a_character_cannot_damage_itself(self):
         character1 = Character(level=1, health=1000)
 
-        character1.damage(character1, 100)
+        character1.damage(character1, 100, 1)
 
         assert character1.health == 1000
 
@@ -92,7 +92,7 @@ class TestCharacter:
         character1 = Character(level=1, health=1000)
         character2 = Character(level=level, health=1000)
 
-        character1.damage(character2, 100)
+        character1.damage(character2, 100, 1)
 
         assert character2.health == 950
 
@@ -101,7 +101,7 @@ class TestCharacter:
         character1 = Character(level=level, health=1000)
         character2 = Character(level=1, health=1000)
 
-        character1.damage(character2, 100)
+        character1.damage(character2, 100, 1)
 
         assert character2.health == 850
 
