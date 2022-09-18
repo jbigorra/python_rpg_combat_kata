@@ -1,6 +1,6 @@
 import pytest
 
-from src.character import Character
+from src.character import Character, CharacterType
 
 
 class TestCharacter:
@@ -18,16 +18,16 @@ class TestCharacter:
         assert character.health == 1000
         assert character.is_alive() is True
         assert character.max_attack_ranged == 2
-        assert character.type == "melee"
+        assert character.type == CharacterType.MELEE
 
     def test_ranged_character_initial_state(self):
-        character = Character(level=1, health=1000, type="ranged")
+        character = Character(level=1, health=1000, type=CharacterType.RANGED)
 
         assert character.level == 1
         assert character.health == 1000
         assert character.is_alive() is True
         assert character.max_attack_ranged == 20
-        assert character.type == "ranged"
+        assert character.type == CharacterType.RANGED
 
     def test_character_damages_another_character(self):
         character1 = Character(level=1, health=1000)
@@ -116,8 +116,8 @@ class TestCharacter:
         assert character2.health == 1000
 
     def test_ranged_character_cannot_damage_another_character_out_of_range(self):
-        character1 = Character(level=1, health=1000, type="RANGED")
-        character2 = Character(level=1, health=1000, type="MELEE")
+        character1 = Character(level=1, health=1000, type=CharacterType.RANGED)
+        character2 = Character(level=1, health=1000, type=CharacterType.MELEE)
 
         character1.damage(character2, 100, 21)
 

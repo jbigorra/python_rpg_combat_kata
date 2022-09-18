@@ -1,10 +1,16 @@
+from enum import Enum
+
+
+class CharacterType(Enum):
+    RANGED = "RANGED"
+    MELEE = "MELEE"
 
 
 class Character:
     max_attack_ranged: float
 
-    def __init__(self, level: int, health: int, type: str = "melee"):
-        self.max_attack_ranged = 2 if type == "melee" else 20
+    def __init__(self, level: int, health: int, type: "CharacterType" = CharacterType.MELEE):
+        self.max_attack_ranged = 2 if type == CharacterType.MELEE else 20
         self.type = type
         self.level = level
         self.health = health
