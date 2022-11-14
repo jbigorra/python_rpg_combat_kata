@@ -55,7 +55,7 @@ class Character:
             character._health = CharacterConfig.MAXIMUM_HEALTH
 
     def join_faction(self, new_faction: [str]):
-        self._factions = new_faction
+        self._factions.extend(new_faction)
 
     def position(self) -> int:
         return self._position

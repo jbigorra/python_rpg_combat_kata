@@ -6,6 +6,7 @@ class CharacterFactory:
     health: int = CharacterConfig.MAXIMUM_HEALTH
     type: CharacterType = CharacterConfig.TYPE
     position: int = 1
+    factions: [str] = []
 
     def _reset_state(self):
         self.level = CharacterConfig.LEVEL
@@ -26,6 +27,10 @@ class CharacterFactory:
 
     def with_position(self, position: int) -> "CharacterFactory":
         self.position = position
+        return self
+
+    def with_factions(self, factions: [str]) -> "CharacterFactory":
+        self.factions = factions
         return self
 
     def build(self) -> "Character":
