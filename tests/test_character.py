@@ -134,4 +134,12 @@ class TestCharacter:
 
         assert len(character.factions()) == 0
 
+    def test_a_character_can_join_one_faction(self):
+        character = CharacterFactory().build()
+
+        character.join_faction(['FACTION_1'])
+
+        assert len(character.factions()) == 1
+        assert character.factions()[0] == 'FACTION_1'
+
 

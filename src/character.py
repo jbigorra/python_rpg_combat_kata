@@ -17,6 +17,7 @@ class CharacterConfig:
 
 class Character:
     max_attack_ranged: float
+    _factions: [str] = []
 
     def __init__(self, level: int, health: int, position: int, type: "CharacterType" = CharacterType.MELEE):
         self._position = position
@@ -53,8 +54,11 @@ class Character:
         if character.health > CharacterConfig.MAXIMUM_HEALTH:
             character.health = CharacterConfig.MAXIMUM_HEALTH
 
+    def join_faction(self, new_faction: [str]):
+        self._factions = new_faction
+
     def position(self) -> int:
         return self._position
 
     def factions(self) -> []:
-        return []
+        return self._factions
