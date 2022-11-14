@@ -10,6 +10,7 @@ class TestCharacter:
 
         assert character._level == CharacterConfig.LEVEL
         assert character._health == CharacterConfig.MAXIMUM_HEALTH
+        assert character._factions == []
         assert character.position() == CharacterConfig.POSITION
         assert character.is_alive() is True
 
@@ -18,6 +19,8 @@ class TestCharacter:
 
         assert character._level == CharacterConfig.LEVEL
         assert character._health == CharacterConfig.MAXIMUM_HEALTH
+        assert character._factions == []
+        assert character.position() == CharacterConfig.POSITION
         assert character.is_alive() is True
         assert character._max_attack_ranged == CharacterConfig.MELEE_MAX_ATTACK_RANGE
         assert character._type == CharacterType.MELEE
@@ -29,6 +32,8 @@ class TestCharacter:
 
         assert character._level == CharacterConfig.LEVEL
         assert character._health == CharacterConfig.MAXIMUM_HEALTH
+        assert character._factions == []
+        assert character.position() == CharacterConfig.POSITION
         assert character.is_alive() is True
         assert character._max_attack_ranged == CharacterConfig.RANGED_MAX_ATTACK_RANGE
         assert character._type == CharacterType.RANGED

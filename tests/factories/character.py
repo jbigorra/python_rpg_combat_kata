@@ -8,11 +8,6 @@ class CharacterFactory:
     position: int = 1
     factions: [str] = []
 
-    def _reset_state(self):
-        self.level = CharacterConfig.LEVEL
-        self.health = CharacterConfig.MAXIMUM_HEALTH
-        self.type = CharacterConfig.TYPE
-
     def with_level(self, level: int) -> "CharacterFactory":
         self.level = level
         return self
@@ -40,9 +35,9 @@ class CharacterFactory:
             type=self.type,
             position=self.position
         )
+
         character._factions = self.factions
 
-        self._reset_state()
         return character
 
     def setup_base_ranged_character(self) -> "CharacterFactory":
