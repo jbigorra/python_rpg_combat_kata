@@ -35,7 +35,11 @@ class Character:
 
     def damage(self, target: "Character", amount: int) -> None:
         damage = amount
-        if self is target or target.position() > self._max_attack_ranged:
+        if (
+            self is target
+            or self._is_ally(target)
+            or target.position() > self._max_attack_ranged
+        ):
             return
 
         if (target._level - self._level) >= 5:
@@ -65,4 +69,7 @@ class Character:
 
     def factions(self) -> []:
         return self._factions
+
+    def _is_ally(self, target: "Character"):
+        return any(faction in target.factions() for faction in self._factions)
 

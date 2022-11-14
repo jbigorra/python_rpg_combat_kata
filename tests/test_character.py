@@ -176,3 +176,13 @@ class TestCharacter:
 
         assert len(character.factions()) == 1
         assert character.factions()[0] == 'FACTION_3'
+
+    def test_a_character_cannot_damage_an_ally(self):
+        character = CharacterFactory()\
+            .with_factions(['FACTION_1', 'FACTION_2'])\
+            .build()
+        ally = CharacterFactory().with_factions(['FACTION_2', 'FACTION_3']).build()
+
+        character.damage(ally, 100)
+
+        assert ally._health == 1000
