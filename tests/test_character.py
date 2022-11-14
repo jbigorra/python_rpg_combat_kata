@@ -112,19 +112,19 @@ class TestCharacter:
     # Iteration 3
 
     def test_melee_character_cannot_damage_another_character_out_of_range(self):
-        character1 = CharacterFactory().build()
-        character2 = CharacterFactory().with_position(3).build()
+        melee_character = CharacterFactory().build()
+        enemy_out_of_range = CharacterFactory().with_position(3).build()
 
-        character1.damage(character2, 100)
+        melee_character.damage(enemy_out_of_range, 100)
 
-        assert character2.health == 1000
+        assert enemy_out_of_range.health == 1000
 
     def test_ranged_character_cannot_damage_another_character_out_of_range(self):
-        character1 = CharacterFactory().setup_base_ranged_character().build()
-        character2 = CharacterFactory().with_position(21).build()
+        ranged_character = CharacterFactory().setup_base_ranged_character().build()
+        enemy_out_ranged = CharacterFactory().with_position(21).build()
 
-        character1.damage(character2, 100)
+        ranged_character.damage(enemy_out_ranged, 100)
 
-        assert character2.health == 1000
+        assert enemy_out_ranged.health == 1000
 
 
