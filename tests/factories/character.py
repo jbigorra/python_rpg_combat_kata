@@ -40,6 +40,8 @@ class CharacterFactory:
             type=self.type,
             position=self.position
         )
+        character._factions = self.factions
+
         self._reset_state()
         return character
 

@@ -57,8 +57,12 @@ class Character:
     def join_faction(self, new_faction: [str]):
         self._factions.extend(new_faction)
 
+    def leave_faction(self, factions: [str]):
+        self._factions.remove(factions[0])
+
     def position(self) -> int:
         return self._position
 
     def factions(self) -> []:
         return self._factions
+
