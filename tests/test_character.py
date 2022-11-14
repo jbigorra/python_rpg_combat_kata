@@ -127,4 +127,11 @@ class TestCharacter:
 
         assert enemy_out_ranged.health == 1000
 
+    # Iteration 4
+
+    def test_new_characters_belong_to_no_faction(self):
+        character = CharacterFactory().build()
+
+        assert len(character.factions()) == 0
+
 

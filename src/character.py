@@ -29,10 +29,10 @@ class Character:
         self.level = level
         self.health = health
 
-    def is_alive(self):
+    def is_alive(self) -> bool:
         return self.health > 0
 
-    def damage(self, target: "Character", amount: int):
+    def damage(self, target: "Character", amount: int) -> None:
         damage = amount
         if self is target or target.position() > self.max_attack_ranged:
             return
@@ -44,7 +44,7 @@ class Character:
 
         target.health -= damage
 
-    def heal(self, character: "Character", amount: int):
+    def heal(self, character: "Character", amount: int) -> None:
         if not character.is_alive() or character is not self:
             return
 
@@ -53,5 +53,8 @@ class Character:
         if character.health > CharacterConfig.MAXIMUM_HEALTH:
             character.health = CharacterConfig.MAXIMUM_HEALTH
 
-    def position(self):
+    def position(self) -> int:
         return self._position
+
+    def factions(self) -> []:
+        return []
