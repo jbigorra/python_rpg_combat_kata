@@ -6,10 +6,11 @@ from tests.factories.character import CharacterFactory
 
 class TestCharacter:
     def test_character_initial_state(self):
-        character = Character(level=1, health=1000)
+        character = Character(level=1, health=1000, position=1)
 
         assert character.level == CharacterConfig.LEVEL
         assert character.health == CharacterConfig.MAXIMUM_HEALTH
+        assert character.position() == CharacterConfig.POSITION
         assert character.is_alive() is True
 
     def test_melee_character_initial_state(self):
@@ -36,7 +37,7 @@ class TestCharacter:
         character1 = CharacterFactory().build()
         character2 = CharacterFactory().build()
 
-        character1.damage(character2, 100, 1)
+        character1.damage(character2, 100)
 
         assert character1.health == 1000
         assert character2.health == 900
@@ -45,7 +46,7 @@ class TestCharacter:
         character1 = CharacterFactory().build()
         character2 = CharacterFactory().with_health(100).build()
 
-        character1.damage(character2, 100, 1)
+        character1.damage(character2, 100)
 
         assert character2.health == 0
         assert character2.is_alive() is False
@@ -71,7 +72,7 @@ class TestCharacter:
     def test_a_character_cannot_damage_itself(self):
         character1 = CharacterFactory().build()
 
-        character1.damage(character1, 100, 1)
+        character1.damage(character1, 100)
 
         assert character1.health == 1000
 
@@ -95,7 +96,7 @@ class TestCharacter:
         character1 = CharacterFactory().build()
         character2 = CharacterFactory().with_level(level).build()
 
-        character1.damage(character2, 100, 1)
+        character1.damage(character2, 100)
 
         assert character2.health == 950
 
@@ -104,7 +105,7 @@ class TestCharacter:
         character1 = CharacterFactory().with_level(level).build()
         character2 = CharacterFactory().build()
 
-        character1.damage(character2, 100, 1)
+        character1.damage(character2, 100)
 
         assert character2.health == 850
 
@@ -112,17 +113,17 @@ class TestCharacter:
 
     def test_melee_character_cannot_damage_another_character_out_of_range(self):
         character1 = CharacterFactory().build()
-        character2 = CharacterFactory().build()
+        character2 = CharacterFactory().with_position(3).build()
 
-        character1.damage(character2, 100, 3)
+        character1.damage(character2, 100)
 
         assert character2.health == 1000
 
     def test_ranged_character_cannot_damage_another_character_out_of_range(self):
         character1 = CharacterFactory().setup_base_ranged_character().build()
-        character2 = CharacterFactory().build()
+        character2 = CharacterFactory().with_position(21).build()
 
-        character1.damage(character2, 100, 21)
+        character1.damage(character2, 100)
 
         assert character2.health == 1000
 

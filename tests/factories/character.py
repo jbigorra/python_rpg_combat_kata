@@ -5,6 +5,7 @@ class CharacterFactory:
     level: int = CharacterConfig.LEVEL
     health: int = CharacterConfig.MAXIMUM_HEALTH
     type: CharacterType = CharacterConfig.TYPE
+    position: int = 1
 
     def _reset_state(self):
         self.level = CharacterConfig.LEVEL
@@ -23,8 +24,17 @@ class CharacterFactory:
         self.type = type
         return self
 
+    def with_position(self, position: int) -> "CharacterFactory":
+        self.position = position
+        return self
+
     def build(self) -> "Character":
-        character = Character(level=self.level, health=self.health, type=self.type)
+        character = Character(
+            level=self.level,
+            health=self.health,
+            type=self.type,
+            position=self.position
+        )
         self._reset_state()
         return character
 
@@ -32,4 +42,5 @@ class CharacterFactory:
         self.level = CharacterConfig.LEVEL
         self.health = CharacterConfig.MAXIMUM_HEALTH
         self.type = CharacterType.RANGED
+        self.position = CharacterConfig.POSITION
         return self
