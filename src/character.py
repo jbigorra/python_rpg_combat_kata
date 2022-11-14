@@ -16,43 +16,43 @@ class CharacterConfig:
 
 
 class Character:
-    max_attack_ranged: float
+    _max_attack_ranged: float
     _factions: [str] = []
 
     def __init__(self, level: int, health: int, position: int, type: "CharacterType" = CharacterType.MELEE):
         self._position = position
-        self.max_attack_ranged = (
+        self._max_attack_ranged = (
             CharacterConfig.MELEE_MAX_ATTACK_RANGE
             if type == CharacterType.MELEE
             else CharacterConfig.RANGED_MAX_ATTACK_RANGE
         )
-        self.type = type
-        self.level = level
-        self.health = health
+        self._type = type
+        self._level = level
+        self._health = health
 
     def is_alive(self) -> bool:
-        return self.health > 0
+        return self._health > 0
 
     def damage(self, target: "Character", amount: int) -> None:
         damage = amount
-        if self is target or target.position() > self.max_attack_ranged:
+        if self is target or target.position() > self._max_attack_ranged:
             return
 
-        if (target.level - self.level) >= 5:
+        if (target._level - self._level) >= 5:
             damage = amount * 0.5
-        elif (target.level - self.level) <= -5:
+        elif (target._level - self._level) <= -5:
             damage = amount * 1.5
 
-        target.health -= damage
+        target._health -= damage
 
     def heal(self, character: "Character", amount: int) -> None:
         if not character.is_alive() or character is not self:
             return
 
-        character.health += amount
+        character._health += amount
 
-        if character.health > CharacterConfig.MAXIMUM_HEALTH:
-            character.health = CharacterConfig.MAXIMUM_HEALTH
+        if character._health > CharacterConfig.MAXIMUM_HEALTH:
+            character._health = CharacterConfig.MAXIMUM_HEALTH
 
     def join_faction(self, new_faction: [str]):
         self._factions = new_faction
