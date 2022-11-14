@@ -166,3 +166,13 @@ class TestCharacter:
         assert len(character.factions()) == 2
         assert character.factions()[0] == 'FACTION_1'
         assert character.factions()[1] == 'FACTION_3'
+
+    def test_a_character_can_leave_more_than_one_faction(self):
+        character = CharacterFactory() \
+            .with_factions(['FACTION_1', 'FACTION_2', 'FACTION_3']) \
+            .build()
+
+        character.leave_faction(['FACTION_2', 'FACTION_1'])
+
+        assert len(character.factions()) == 1
+        assert character.factions()[0] == 'FACTION_3'

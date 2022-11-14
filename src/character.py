@@ -58,7 +58,7 @@ class Character:
         self._factions.extend(new_faction)
 
     def leave_faction(self, factions: [str]):
-        self._factions.remove(factions[0])
+        [self._factions.remove(faction) for faction in factions]
 
     def position(self) -> int:
         return self._position
