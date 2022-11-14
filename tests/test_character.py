@@ -26,8 +26,8 @@ class TestCharacter:
         assert character._type == CharacterType.MELEE
 
     def test_ranged_character_initial_state(self):
-        character = CharacterFactory()\
-            .setup_base_ranged_character()\
+        character = CharacterFactory() \
+            .setup_base_ranged_character() \
             .build()
 
         assert character._level == CharacterConfig.LEVEL
@@ -157,8 +157,8 @@ class TestCharacter:
         assert character.factions()[1] == 'FACTION_2'
 
     def test_a_character_can_leave_one_faction(self):
-        character = CharacterFactory()\
-            .with_factions(['FACTION_1', 'FACTION_2', 'FACTION_3'])\
+        character = CharacterFactory() \
+            .with_factions(['FACTION_1', 'FACTION_2', 'FACTION_3']) \
             .build()
 
         character.leave_faction(['FACTION_2'])
