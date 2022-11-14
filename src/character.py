@@ -50,7 +50,9 @@ class Character:
         target._health -= damage
 
     def heal(self, character: "Character", amount: int) -> None:
-        if not character.is_alive() or character is not self:
+        if character is not self and not self._is_ally(character):
+            return
+        if not character.is_alive():
             return
 
         character._health += amount
